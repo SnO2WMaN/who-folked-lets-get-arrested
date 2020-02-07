@@ -3,15 +3,10 @@ const querystring = require("querystring");
 const alphaSort = require("alpha-sort");
 const { Octokit } = require("@octokit/rest");
 
-const {
-  GITHUB_TOKEN,
-  REPOSITORY_OWNER,
-  REPOSITORY_NAME,
-  GIST_ID
-} = process.env;
+const { GH_TOKEN, REPOSITORY_OWNER, REPOSITORY_NAME, GIST_ID } = process.env;
 
 const octokit = new Octokit({
-  auth: `token ${GITHUB_TOKEN}`
+  auth: `token ${GH_TOKEN}`
 });
 
 (async () => {
@@ -21,7 +16,7 @@ const octokit = new Octokit({
     `https://api.github.com/repos/${REPOSITORY_OWNER}/${REPOSITORY_NAME}/forks`,
     {
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`
+        Authorization: `token ${GH_TOKEN}`
       }
     }
   );
@@ -37,7 +32,7 @@ const octokit = new Octokit({
           axios
             .get(url, {
               headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token ${GH_TOKEN}`
               }
             })
             .then(({ data }) =>
